@@ -5,6 +5,9 @@ counter['cntnone']=0
 counter['cnt2aprox']=0
 counter['cntgreedy']=0
 counter['cnt2greedy']=0
+counter['requests']=0
+counter['nodes']=0
+counter['edges']=0
 counter['mxmnone']=0
 counter['mxm2aprox']=0
 counter['mxmgreedy']=0
@@ -14,8 +17,10 @@ counter['graphs']={}
 def graph():
 	if request.method == 'POST':
 		hsh=request.form
-		print(hsh)
 		try:
+			counter['nodes']+=hsh['nodes']
+			counter['edges']+=hsh['edges']
+			counter['requests']+=1
 			if(hsh['none']==None or hsh['none']==0):
 				return "fail"
 			if(hsh['2greedy']==None):
