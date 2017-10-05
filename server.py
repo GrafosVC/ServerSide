@@ -1,4 +1,10 @@
 from flask import Flask,request,jsonify
+
+from OpenSSL import SSL
+import ssl
+context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+context.load_cert_chain('server.crt', 'server.key')
+
 app = Flask("Server")
 counter = {}
 counter['cntnone']=0
@@ -41,3 +47,5 @@ def graph():
 			return "fail"
 	else:
 		return jsonify(counter)
+app.run(host='127.0.0.1',port='5000',
+        debug = False, ssl_context=context)
