@@ -1,4 +1,5 @@
 from flask import Flask,request,jsonify
+from random import shuffle
 
 app = Flask("Server",static_url_path='',static_folder="GrafosVC.github.io/")
 counter = {}
@@ -42,6 +43,10 @@ def graph():
 					counter['mxm'+otim]=tmp['mxm'+otim]
 					counter['graphs'][otim]=hsh['graph']
 			graphs.append(hsh)
+			dumpname='abcdefghijklmnopqrstuvwxyz'
+			shuffle(dumpname)
+			with open('GrafosVC.github.io/dump/'+dumpname+'.json', 'w') as outfile:
+    			json.dump(hsh, outfile)
 			return "ok"
 		except:
 			print("here2")
