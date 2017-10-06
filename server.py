@@ -17,7 +17,7 @@ counter['graphs']={}
 @app.route('/graph', methods=['GET', 'POST'])
 def graph():
 	if request.method == 'POST':
-		hsh=request.form
+		hsh=request.json
 		try:
 			print(hsh)
 			counter['nodes']+=hsh['nodes']
