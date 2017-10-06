@@ -1,5 +1,6 @@
 from flask import Flask,request,jsonify
 from random import shuffle
+import json
 
 app = Flask("Server",static_url_path='',static_folder="GrafosVC.github.io/")
 counter = {}
