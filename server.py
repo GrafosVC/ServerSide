@@ -1,10 +1,5 @@
 from flask import Flask,request,jsonify
 
-from OpenSSL import SSL
-import ssl
-context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-context.load_cert_chain('server.crt', 'server.key')
-
 app = Flask("Server",static_url_path='',static_folder="GrafosVC.github.io/")
 counter = {}
 counter['cntnone']=0
@@ -24,9 +19,11 @@ def graph():
 	if request.method == 'POST':
 		hsh=request.form
 		try:
+			print(hsh)
 			counter['nodes']+=hsh['nodes']
 			counter['edges']+=hsh['edges']
 			counter['requests']+=1
+			print("here0")
 			if(hsh['none']==None or hsh['none']==0):
 				return "fail"
 			if(hsh['2greedy']==None):
@@ -36,6 +33,7 @@ def graph():
 			if(hsh['2aprox']==None):
 				return "fail"
 			tmp={}
+			print("here1")
 			for otim in ['none','2aprox','greedy','2greedy']:
 				tmp['mxm'+otim]=float(hsh[otim])/float(hsh['none'])
 				counter['cnt'+otim]+=int(hsh[otim])
@@ -44,8 +42,9 @@ def graph():
 					counter['graphs'][otim]=hsh['graph']
 			return "ok"
 		except:
+
+			print("here2")
 			return "fail"
 	else:
 		return jsonify(counter)
-app.run(host='0.0.0.0',port='5000',
-        debug = False, ssl_context=context)
+app.run(host='0.0.0.0',port='5000')
