@@ -46,7 +46,7 @@ def graph():
 			dumpname='abcdefghijklmnopqrstuvwxyz'
 			shuffle(dumpname)
 			with open('GrafosVC.github.io/dump/'+dumpname+'.json', 'w') as outfile:
-    			json.dump(hsh, outfile)
+				json.dump(hsh, outfile)
 			return "ok"
 		except:
 			print("here2")
