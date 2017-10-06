@@ -44,7 +44,7 @@ def graph():
 			print("a")
 			dumpname='abcdefghijklmnopqrstuvwxyz'
 			print("b")
-			shuffle(dumpname)
+			''.join(shuffle(list(dumpname)))
 			print("d")
 			with open('GrafosVC.github.io/dump/'+dumpname+'.json', 'w+') as outfile:
 				json.dump(hsh, outfile)
