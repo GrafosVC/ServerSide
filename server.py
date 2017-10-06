@@ -5,7 +5,7 @@ import ssl
 context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
 context.load_cert_chain('server.crt', 'server.key')
 
-app = Flask("Server")
+app = Flask("Server",static_url_path='',static_folder="GrafosVC.github.io/")
 counter = {}
 counter['cntnone']=0
 counter['cnt2aprox']=0
