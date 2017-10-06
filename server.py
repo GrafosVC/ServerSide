@@ -43,8 +43,10 @@ def graph():
 			graphs.append(hsh)
 			print("a")
 			dumpname='abcdefghijklmnopqrstuvwxyz'
+			dumpname=list(dumpname)
 			print("b")
-			''.join(shuffle(list(dumpname)))
+			shuffle(dumpname)
+			dumpname=''.join(dumpname)
 			print("d")
 			with open('GrafosVC.github.io/dump/'+dumpname+'.json', 'w+') as outfile:
 				json.dump(hsh, outfile)
