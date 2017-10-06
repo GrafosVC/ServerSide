@@ -14,6 +14,7 @@ counter['mxm2aprox']=0
 counter['mxmgreedy']=0
 counter['mxm2greedy']=0
 counter['graphs']={}
+graphs=[]
 @app.route('/graph', methods=['GET', 'POST'])
 def graph():
 	if request.method == 'POST':
@@ -40,11 +41,15 @@ def graph():
 				if(tmp['mxm'+otim]>counter['mxm'+otim]):
 					counter['mxm'+otim]=tmp['mxm'+otim]
 					counter['graphs'][otim]=hsh['graph']
+			graphs.append(hsh)
 			return "ok"
 		except:
-
 			print("here2")
 			return "fail"
 	else:
 		return jsonify(counter)
+
+@app.route('/graphs', methods=['GET', 'POST'])
+def graphss():
+	return jsonify(graphs)
 app.run(host='0.0.0.0',port='5000')
