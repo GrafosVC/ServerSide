@@ -25,7 +25,6 @@ def graph():
 			counter['nodes']+=hsh['nodes']
 			counter['edges']+=hsh['edges']
 			counter['requests']+=1
-			print("here0")
 			if(hsh['none']==None or hsh['none']==0):
 				return "fail"
 			if(hsh['2greedy']==None):
@@ -35,7 +34,6 @@ def graph():
 			if(hsh['2aprox']==None):
 				return "fail"
 			tmp={}
-			print("here1")
 			for otim in ['none','2aprox','greedy','2greedy']:
 				tmp['mxm'+otim]=float(hsh[otim])/float(hsh['none'])
 				counter['cnt'+otim]+=int(hsh[otim])
@@ -43,9 +41,12 @@ def graph():
 					counter['mxm'+otim]=tmp['mxm'+otim]
 					counter['graphs'][otim]=hsh['graph']
 			graphs.append(hsh)
+			print("a")
 			dumpname='abcdefghijklmnopqrstuvwxyz'
+			print("b")
 			shuffle(dumpname)
-			with open('GrafosVC.github.io/dump/'+dumpname+'.json', 'w') as outfile:
+			print("d")
+			with open('GrafosVC.github.io/dump/'+dumpname+'.json', 'w+') as outfile:
 				json.dump(hsh, outfile)
 			return "ok"
 		except:
