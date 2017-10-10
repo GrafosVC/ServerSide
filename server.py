@@ -16,6 +16,11 @@ counter['mxm2aprox']=0
 counter['mxmgreedy']=0
 counter['mxm2greedy']=0
 counter['graphs']={}
+batch={}
+batch['edges']=10
+batch['nodes']=5
+batch['count']=0
+
 graphs=[]
 @app.route('/graph', methods=['GET', 'POST'])
 def graph():
@@ -41,24 +46,36 @@ def graph():
 				if(tmp['mxm'+otim]>counter['mxm'+otim]):
 					counter['mxm'+otim]=tmp['mxm'+otim]
 					counter['graphs'][otim]=hsh['graph']
-			graphs.append(hsh)
-			print("a")
+			#graphs.append(hsh)
 			dumpname='abcdefghijklmnopqrstuvwxyz'
 			dumpname=list(dumpname)
-			print("b")
 			shuffle(dumpname)
 			dumpname=''.join(dumpname)
-			print("d")
 			with open('GrafosVC.github.io/dump/'+dumpname+'.json', 'w+') as outfile:
 				json.dump(hsh, outfile)
+			with open('GrafosVC.github.io/dump/'+dumpname+'.json', 'rb') as outfile:
+				s3.upload_fileobj(outfile, "grafosvc", "dump")
 			return "ok"
 		except:
-			print("here2")
 			return "fail"
 	else:
-		return jsonify(counter)
+		return jsonify({'stats': counter,'batch': batch})
 
-@app.route('/graphs', methods=['GET', 'POST'])
+def magic(nodes,index):
+	if(index<5):
+		return nodes*2
+	if(index<10):
+		return nodes*3
+	if(index<15):
+		return (nodes*nodes)//5
+	return (nodes*nodes)//4
+
+@app.route('/graphindex', methods=['GET', 'POST'])
 def graphss():
-	return jsonify(graphs)
+	batch['count']+=1
+	if batch['count']==20:
+		batch['count']=0
+		batch['nodes']+=1
+	batch['edges']=magic(batch['nodes'],batch['count'])
+	return jsonify(batch)
 app.run(host='0.0.0.0',port='5000')
