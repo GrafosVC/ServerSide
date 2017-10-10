@@ -106,4 +106,15 @@ def graphss():
 		batch['nodes']+=1
 	batch['edges']=magic(batch['nodes'],batch['count'])
 	return jsonify(batch)
+
+@app.route('/resetindex', methods=['GET', 'POST'])
+def resetindex():
+	batch['count']=0
+	batch['nodes']=5
+	batch['edges']=10
+
+@app.route('/bumpnodes', methods=['GET', 'POST'])
+def bumpnodes():
+	batch['nodes']+=5
+
 app.run(host='0.0.0.0',port='5000')
