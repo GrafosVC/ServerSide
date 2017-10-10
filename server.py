@@ -90,18 +90,18 @@ def graph():
 		return jsonify({'counter': counter,'batch': batch, 'graphs':graphs})
 
 def magic(nodes,index):
-	if(index<5):
+	if(index<nodes):
 		return nodes*2
-	if(index<10):
+	if(index<2*nodes):
 		return nodes*3
-	if(index<15):
+	if(index<3*nodes):
 		return (nodes*nodes)//5
 	return (nodes*nodes)//4
 
 @app.route('/graphindex', methods=['GET', 'POST'])
 def graphss():
 	batch['count']+=1
-	if batch['count']==20:
+	if batch['count']>=4*batch['nodes']:
 		batch['count']=0
 		batch['nodes']+=1
 	batch['edges']=magic(batch['nodes'],batch['count'])
