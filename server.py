@@ -55,7 +55,7 @@ def graph():
 		except:
 			return "fail"
 	else:
-		return jsonify({'counter': counter,'batch': batch})
+		return jsonify({'counter': counter,'batch': batch, 'graphs':graphs})
 
 def magic(nodes,index):
 	if(index<5):
