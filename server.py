@@ -46,15 +46,6 @@ def graph():
 				if(tmp['mxm'+otim]>counter['mxm'+otim]):
 					counter['mxm'+otim]=tmp['mxm'+otim]
 					counter['graphs'][otim]=hsh['graph']
-			#graphs.append(hsh)
-			dumpname='abcdefghijklmnopqrstuvwxyz'
-			dumpname=list(dumpname)
-			shuffle(dumpname)
-			dumpname=''.join(dumpname)
-			with open('GrafosVC.github.io/dump/'+dumpname+'.json', 'w+') as outfile:
-				json.dump(hsh, outfile)
-			with open('GrafosVC.github.io/dump/'+dumpname+'.json', 'rb') as outfile:
-				s3.upload_fileobj(outfile, "grafosvc", "dump")
 			return "ok"
 		except:
 			return "fail"
