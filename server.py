@@ -25,7 +25,7 @@ graphs={}
 def graph():
 	if request.method == 'POST':
 		hshs=request.json
-		if hshs['graphs']!=None:
+		if 'graphs' in hshs.keys():
 			for hsh in hshs['graphs']:
 				try:
 					if(hsh['none']==None or hsh['none']==0):
