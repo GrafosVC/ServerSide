@@ -43,7 +43,7 @@ def graph():
 					if hsh['nodes'] not in graphs.keys():
 						graphs[hsh['nodes']]={}
 					if hsh['edges'] not in graphs[hsh['nodes']].keys():
-						graphs[hsh['nodes']][hsh['edges']]={'mxmnone':0,'mxm2aprox':0,'mxmgreedy':0,'mxm2greedy':0,'cntnone':0,'cnt2aprox':0,'cntgreedy':0,'cnt2greedy':0}
+						graphs[hsh['nodes']][hsh['edges']]={'graph':{},'mxmnone':0,'mxm2aprox':0,'mxmgreedy':0,'mxm2greedy':0,'cntnone':0,'cnt2aprox':0,'cntgreedy':0,'cnt2greedy':0}
 					for otim in ['none','2aprox','greedy','2greedy']:
 						tmp['mxm'+otim]=float(hsh[otim])/float(hsh['none'])
 						counter['cnt'+otim]+=int(hsh[otim])
@@ -53,6 +53,7 @@ def graph():
 							counter['graphs'][otim]=hsh['graph']
 						if(tmp['mxm'+otim]>graphs[hsh['nodes']][hsh['edges']]['mxm'+otim]):
 							graphs[hsh['nodes']][hsh['edges']]['mxm'+otim]=tmp['mxm'+otim]
+							graphs[hsh['nodes']][hsh['edges']]['graph']=hsh['graph']
 				except:
 					return "fail"
 		else:
@@ -73,7 +74,7 @@ def graph():
 				if hsh['nodes'] not in graphs.keys():
 					graphs[hsh['nodes']]={}
 				if hsh['edges'] not in graphs[hsh['nodes']].keys():
-					graphs[hsh['nodes']][hsh['edges']]={'mxmnone':0,'mxm2aprox':0,'mxmgreedy':0,'mxm2greedy':0,'cntnone':0,'cnt2aprox':0,'cntgreedy':0,'cnt2greedy':0}
+					graphs[hsh['nodes']][hsh['edges']]={'graph':{},'mxmnone':0,'mxm2aprox':0,'mxmgreedy':0,'mxm2greedy':0,'cntnone':0,'cnt2aprox':0,'cntgreedy':0,'cnt2greedy':0}
 				for otim in ['none','2aprox','greedy','2greedy']:
 					tmp['mxm'+otim]=float(hsh[otim])/float(hsh['none'])
 					counter['cnt'+otim]+=int(hsh[otim])
@@ -83,6 +84,7 @@ def graph():
 						counter['graphs'][otim]=hsh['graph']
 					if(tmp['mxm'+otim]>graphs[hsh['nodes']][hsh['edges']]['mxm'+otim]):
 						graphs[hsh['nodes']][hsh['edges']]['mxm'+otim]=tmp['mxm'+otim]
+						graphs[hsh['nodes']][hsh['edges']]['graph']=hsh['graph']
 			except:
 				return "fail"
 		return "ok"
