@@ -25,6 +25,11 @@ batch['edges']=10
 batch['nodes']=5
 batch['count']=0
 graphs={}
+with open('backup') as bkp:
+	aux=json.load(bkp)
+	graphs=aux['graphs']
+	batch=aux['batch']
+	counter=aux['counter']
 def update_data(hsh):
 	try:
 		if(hsh['none']==None or hsh['none']==0):
@@ -55,7 +60,10 @@ def update_data(hsh):
 			if(tmp['mxm'+otim]>graphs[hsh['nodes']][hsh['edges']]['mxm'+otim]):
 				graphs[hsh['nodes']][hsh['edges']]['mxm'+otim]=tmp['mxm'+otim]
 				graphs[hsh['nodes']][hsh['edges']]['graph']=hsh['graph']
+		with open('aa{}'.format(batch['nodes']),'w') as obj:
+			json.dump({'counter':counter,'batch':batch,'graphs':graphs},obj)
 	except:
+		print("a")
 		return "fail"
 	return "ok"
 
